@@ -1,0 +1,37 @@
+{
+  "name": "native-server",
+  "framework": "native-cpp-official-remote-capability",
+  "primary_entry": "../Server.exe",
+  "project": "../Server/Server.vcxproj",
+  "source_root": "../Server/src",
+  "build_output": "../Server/Release/Server.exe",
+  "data_root": ".",
+  "layers": {
+    "login_and_server_list": {
+      "module": "../Server/src/Services/LoginService.cpp",
+      "protocol": "HTTP",
+      "default_port": 40000,
+      "official_mapping": "Server.ini remote login point / server list"
+    },
+    "room_lobby": {
+      "module": "../Server/src/Services/LobbyService.cpp",
+      "data": "rooms.json",
+      "protocol": "HTTP",
+      "default_port": 40000,
+      "official_mapping": "room lobby / room list"
+    },
+    "game_session_relay": {
+      "module": "../Server/src/Services/GameRelayService.cpp",
+      "protocol_module": "../Server/src/Protocol/PmProtocol.cpp",
+      "protocol": "TCP and UDP",
+      "default_port": 40001,
+      "official_mapping": "match start / sync / relay"
+    },
+    "client_lobby_api": {
+      "module": "../Server/src/Services/LobbyService.cpp",
+      "protocol": "HTTP",
+      "default_port": 40000,
+      "official_mapping": "launcher lobby API"
+    }
+  }
+}
